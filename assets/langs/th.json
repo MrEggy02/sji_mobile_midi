@@ -1,0 +1,16 @@
+{
+  "home": "หน้าหลัก",
+  "portfolio": "พอร์ตการลงทุน",
+  "trade": "เทรด",
+  "watchlist": "รายการติดตาม",
+  "market": "ตลาด",
+  "selectLanguage": "เลือกภาษา",
+  "languageChanged": "เปลี่ยนภาษาเป็น {language}",
+  "option": "ตัวเลือก",
+  "languages": "ภาษา",
+  "settings": "การตั้งค่า",
+  "helpSupport": "ช่วยเหลือ & สนับสนุน",
+  "darkMode": "โหมดกลางคืน",
+  "lightMode": "โหมดกลางวัน",
+  "logout": "ออกจากระบบ"
+}

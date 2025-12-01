@@ -1,0 +1,17 @@
+{
+
+  "home": "Home",
+  "portfolio": "Portfolio",
+  "trade": "Trade",
+  "watchlist": "Watchlist",
+  "market": "Market",
+  "selectLanguage": "Select Language",
+  "languageChanged": "Language changed to {language}",
+  "option": "Option",
+  "languages": "Languages",
+  "settings": "Settings",
+  "helpSupport": "Help & Support",
+  "darkMode": "Dark Mode",
+  "lightMode": "Light Mode",
+  "logout": "Logout"
+}

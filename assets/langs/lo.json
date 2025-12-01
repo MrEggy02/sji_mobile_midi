@@ -1,0 +1,16 @@
+{
+  "home": "ໜ້າຫຼັກ",
+  "portfolio": "ກະເປົາ",
+  "trade": "ຊື້ຂາຍ",
+  "watchlist": "ລາຍການຕິດຕາມ",
+  "market": "ຕະຫຼາດ",
+  "selectLanguage": "ເລືອກພາສາ",
+  "languageChanged": "ປ່ຽນພາສາເປັນ {language}",
+  "option": "ຕົວເລືອກ",
+  "languages": "ພາສາ",
+  "settings": "ການຕັ້ງຄ່າ",
+  "helpSupport": "ຊ່ວຍເຫຼືອ & ສະຫນັບສະຫນູນ",
+  "darkMode": "ໂຫມດມືດ",
+  "lightMode": "ໂຫມດສະຫວ່າງ",
+  "logout": "ອອກຈາກລະບົບ"
+}
