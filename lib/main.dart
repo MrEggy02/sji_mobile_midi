@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sji_mobile/core/routes/app_routes.dart';
 import 'package:sji_mobile/core/styles/theme/theme_service.dart';
 import 'package:sji_mobile/feature/home/page/home.dart';
 
@@ -15,13 +16,12 @@ class MyApp extends StatelessWidget {
       valueListenable: ThemeService.isDarkMode,
       builder: (context, isDarkMode, child) {
         return MaterialApp(
-          debugShowCheckedModeBanner: false, 
+          debugShowCheckedModeBanner: false,
           title: "sji_mobile",
           theme: ThemeService.currentTheme,
           home: const HomePage(),
-          routes: {
-            '/home': (context) => const HomePage(),
-          },
+          initialRoute: AppRoutes.splash,
+          routes: AppRoutes.routes,
         );
       },
     );

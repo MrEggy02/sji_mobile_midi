@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sji_mobile/core/routes/app_routes.dart';
 import 'package:sji_mobile/core/styles/color/styles_color.dart';
 import 'package:sji_mobile/core/styles/theme/theme_service.dart';
 
@@ -19,6 +20,9 @@ class DrawerMenu extends StatelessWidget {
       children: [
         _buildDrawerItem(Icons.home_outlined, "Home", true, isDarkMode, () {}),
         _buildDrawerItem(Icons.lightbulb_outline, "Option", false, isDarkMode, () {}),
+        _buildDrawerItem(Icons.account_balance, "Asset", false, isDarkMode, () {
+          Navigator.pushNamed(context, AppRoutes.asset);
+        }),
         _buildDrawerItem(Icons.map_rounded, "MiniMap", false, isDarkMode, () {}),
         _buildDrawerItem(Icons.translate, "Languages", false, isDarkMode, onLanguageTap),
         _buildDrawerItem(Icons.settings, "Settings", false, isDarkMode, () {}),

@@ -68,7 +68,7 @@ class SocialSection extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "Social Feed",
+                    "News and Social Feed",
                     style: TextStyle(
                       color: ThemeService.textPrimaryColor.withOpacity(0.8),
                       fontSize: 16,
@@ -77,7 +77,7 @@ class SocialSection extends StatelessWidget {
                   ),
                 ],
               ),
-              const SizedBox(height: 12),
+              const SizedBox(height: 6),
               
               Container(
                 decoration: BoxDecoration(
@@ -154,65 +154,7 @@ class SocialSection extends StatelessWidget {
     );
   }
 
-  // Alternative version with custom buttons (if you prefer more control over styling)
-  Widget _buildFilterButtonsCustom(bool isDarkMode) {
-    return Container(
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        border: Border(
-          bottom: BorderSide(
-            color: ThemeService.textSecondaryColor.withOpacity(0.1),
-            width: 1,
-          ),
-        ),
-      ),
-      child: SingleChildScrollView(
-        scrollDirection: Axis.horizontal,
-        child: Row(
-          children: _filterOptions.asMap().entries.map((entry) {
-            final index = entry.key;
-            final option = entry.value;
-            final isSelected = index == _selectedFilterIndex;
-            
-            return Container(
-              margin: const EdgeInsets.only(right: 8),
-              child: GestureDetector(
-                onTap: () {
-                  _selectedFilterIndex = index;
-                  // You might want to use a StatefulWidget or state management to handle this
-                },
-                child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                  decoration: BoxDecoration(
-                    color: isSelected 
-                        ? AppColors.primaryGreen 
-                        : ThemeService.cardColor.withOpacity(0.5),
-                    borderRadius: BorderRadius.circular(20),
-                    border: Border.all(
-                      color: isSelected 
-                          ? AppColors.primaryGreen
-                          : ThemeService.textSecondaryColor.withOpacity(0.2),
-                      width: 1,
-                    ),
-                  ),
-                  child: Text(
-                    option,
-                    style: TextStyle(
-                      color: isSelected 
-                          ? Colors.white 
-                          : ThemeService.textPrimaryColor,
-                      fontSize: 12,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                ),
-              ),
-            );
-          }).toList(),
-        ),
-      ),
-    );
-  }
+ 
 
   Widget _buildSocialItem(Map<String, dynamic> social, bool isDarkMode, BuildContext context) {
     Color changeColor = social['isPositive'] ? AppColors.positive : AppColors.negative;
@@ -332,10 +274,10 @@ class SocialSection extends StatelessWidget {
                     if (hasImage) ...[
                       const SizedBox(height: 12),
                       Container(
-                        width: double.infinity,
-                        height: 180,
+                        width: 600,
+                        height: 140,
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(12),
+                          borderRadius: BorderRadius.circular(10),
                           image: DecorationImage(
                             image: NetworkImage(social['imageUrl']),
                             fit: BoxFit.cover,

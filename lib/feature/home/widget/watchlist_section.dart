@@ -13,13 +13,22 @@ class MyTrades extends StatelessWidget {
     "NVDA": [485.0, 490.5, 495.2, 492.8, 495.5],
   };
 
+  // Map stock symbols to your asset images
+  final Map<String, String> _stockLogos = const {
+    "AAPL": "assets/images/apple.jpg",
+    "TSLA": "assets/images/tesla.jpg",
+    "MSFT": "assets/images/microsoft.jpg",
+    "GOOGL": "assets/images/google.jpg",
+    "NVDA": "assets/images/nvidia.jpg",
+  };
+
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder<bool>(
       valueListenable: ThemeService.isDarkMode,
       builder: (context, isDarkMode, child) {
         return Container(
-          margin: const EdgeInsets.all(16),
+          margin: const EdgeInsets.symmetric(horizontal: 16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -27,18 +36,36 @@ class MyTrades extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "Your Position",
+                    "Watchlist",
                     style: TextStyle(
                       color: ThemeService.textPrimaryColor.withOpacity(0.8),
                       fontSize: 16,
                       fontWeight: FontWeight.w600,
                     ),
                   ),
+
+                  // Add Button
+                  ElevatedButton(
+                    onPressed: () {},
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.black,
+                      shape: const CircleBorder(),
+                      padding: const EdgeInsets.all(4),
+                      minimumSize: const Size(24, 24),
+                      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                      elevation: 0,
+                    ),
+                    child: Icon(
+                      Icons.add,
+                      size: 18,
+                      color: ThemeService.cardColor,
+                    ),
+                  ),
                 ],
               ),
-              const SizedBox(height: 12),
+
               Container(
-                padding: const EdgeInsets.all(20),
+               
                 decoration: BoxDecoration(
                   color: ThemeService.cardColor,
                   borderRadius: BorderRadius.circular(20),
@@ -48,7 +75,7 @@ class MyTrades extends StatelessWidget {
                     // Header Row
                     _buildHeaderRow(isDarkMode),
                     const SizedBox(height: 16),
-                    
+
                     // Trade Items
                     _buildTradeItem(
                       "AAPL",
@@ -107,52 +134,60 @@ class MyTrades extends StatelessWidget {
 
   Widget _buildHeaderRow(bool isDarkMode) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+      padding: const EdgeInsets.symmetric(),
       child: Row(
         children: [
-          // Logo/Icon placeholder
-   
-          const SizedBox(width: 12),
-          
-          // Stock Info header
-          Expanded(
-            child: Text(
-              "Stock",
-              style: TextStyle(
-                color: ThemeService.textSecondaryColor,
-                fontSize: 12,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-          ),
-          
-          // Chart header - Centered
+      
           Container(
-            width: 80, // Increased width for better centering
+            width: 30,
             child: Center(
               child: Text(
-                "Chart",
+                "",
                 style: TextStyle(
                   color: ThemeService.textSecondaryColor,
                   fontSize: 12,
-                  fontWeight: FontWeight.w600,
                 ),
               ),
             ),
           ),
-          
+          const SizedBox(width: 12),
+
+          // Stock Info header
+          Expanded(
+            child: Text(
+              "Name",
+              style: TextStyle(
+                color: ThemeService.textSecondaryColor,
+                fontSize: 12,
+              ),
+            ),
+          ),
+
+          // Chart header - Centered
+          Container(
+            width: 80,
+            child: Center(
+              child: Text(
+                "24h Chg%",
+                style: TextStyle(
+                  color: ThemeService.textSecondaryColor,
+                  fontSize: 12,
+                ),
+              ),
+            ),
+          ),
+
           // Price/Holding header
           Container(
-            width: 80, // Fixed width for alignment
+            width: 80,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Text(
-                  "Price",
+                  "Last Price",
                   style: TextStyle(
                     color: ThemeService.textSecondaryColor,
                     fontSize: 12,
-                    fontWeight: FontWeight.w600,
                   ),
                 ),
               ],
@@ -177,37 +212,50 @@ class MyTrades extends StatelessWidget {
     double maxPrice = priceData.reduce((a, b) => a > b ? a : b);
     double priceRange = maxPrice - minPrice;
 
+    // Get the logo path from the map, fallback to a placeholder
+    String? logoPath = _stockLogos[symbol];
+
     return Container(
       margin: const EdgeInsets.only(bottom: 16),
       child: Row(
         children: [
-          // Company Logo/Icon
-          Container(
-            width: 30,
-            height: 30,
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [
-                  (isDarkMode ? Colors.white : Colors.black).withOpacity(0.1),
-                  (isDarkMode ? Colors.white : Colors.black).withOpacity(0.1),
-                ],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
+          // Company Logo using Image.asset
+          if (logoPath != null)
+            Container(
+              width: 30,
+              height: 30,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15),
+                image: DecorationImage(
+                  image: AssetImage(logoPath),
+                  fit: BoxFit.cover,
+                ),
               ),
-              borderRadius: BorderRadius.circular(20),
-            ),
-            child: Center(
-              child: Text(
-                symbol.substring(0, 1),
-                style: TextStyle(
-                  color: ThemeService.textPrimaryColor,
-                  fontWeight: FontWeight.bold,
+            )
+          else
+            // Fallback if logo not found
+            Container(
+              width: 30,
+              height: 30,
+              decoration: BoxDecoration(
+                color: (isDarkMode ? Colors.white : Colors.black).withOpacity(
+                  0.1,
+                ),
+                borderRadius: BorderRadius.circular(15),
+              ),
+              child: Center(
+                child: Text(
+                  symbol.substring(0, 1),
+                  style: TextStyle(
+                    color: ThemeService.textPrimaryColor,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
             ),
-          ),
-          const SizedBox(width: 4),
-          
+
+          const SizedBox(width: 6),
+
           // Stock Info
           Expanded(
             child: Column(
@@ -230,14 +278,14 @@ class MyTrades extends StatelessWidget {
               ],
             ),
           ),
-          
-          // Mini Chart - Centered with proper spacing
+
+          // Mini Chart
           Container(
-            width: 80, // Increased width for better centering
+            width: 80,
             height: 30,
-            child: Center( // Center the chart
+            child: Center(
               child: Container(
-                width: 60, // Chart width
+                width: 60,
                 height: 30,
                 child: CustomPaint(
                   painter: _MiniChartPainter(
@@ -245,16 +293,18 @@ class MyTrades extends StatelessWidget {
                     minPrice: minPrice,
                     priceRange: priceRange,
                     isPositive: isPositive,
-                    lineColor: isPositive ? AppColors.positive : AppColors.negative,
+                    lineColor: isPositive
+                        ? AppColors.positive
+                        : AppColors.negative,
                   ),
                 ),
               ),
             ),
           ),
-          
+
           // Price and Holding
           Container(
-            width: 80, // Fixed width for alignment
+            width: 80,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
@@ -269,8 +319,8 @@ class MyTrades extends StatelessWidget {
                 Text(
                   holding,
                   style: TextStyle(
-                    color: ThemeService.textSecondaryColor, 
-                    fontSize: 12
+                    color: ThemeService.textSecondaryColor,
+                    fontSize: 12,
                   ),
                 ),
               ],
@@ -281,8 +331,6 @@ class MyTrades extends StatelessWidget {
     );
   }
 }
-
-
 
 class _MiniChartPainter extends CustomPainter {
   final List<double> data;

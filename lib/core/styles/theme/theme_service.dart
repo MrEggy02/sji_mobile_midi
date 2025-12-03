@@ -27,6 +27,11 @@ class ThemeService {
   static Color get textSecondaryColor {
     return isDarkMode.value ? AppColors.darkTextSecondary : AppColors.lightTextSecondary;
   }
+  static Color get iconColor {
+    return isDarkMode.value
+        ? AppColors.lightBackground
+        : AppColors.darkBackground;
+  }
 
   static final ThemeData _darkTheme = ThemeData(
     brightness: Brightness.dark,

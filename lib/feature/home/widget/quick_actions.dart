@@ -92,55 +92,55 @@ class _QuickActionsState extends State<QuickActions> {
     );
   }
 
-Widget _buildActionButton(String text, String imagePath, bool isDarkMode) {
-  return Column(
-    children: [
-      Container(
-        width: 54,
-        height: 54,
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          color: Colors.transparent, // Removed gradient → transparent background
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Image.asset(
-            imagePath,
-           
-            width: 20,
-            height: 20,
-            fit: BoxFit.contain,
+  Widget _buildActionButton(String text, String imagePath, bool isDarkMode) {
+    return Column(
+      children: [
+        Container(
+          width: 54,
+          height: 54,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            color:
+                Colors.transparent, // Removed gradient → transparent background
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Image.asset(
+              imagePath,
+
+              width: 20,
+              height: 20,
+              fit: BoxFit.contain,
+            ),
           ),
         ),
-      ),
-   
-      Text(
-        text,
-        style: TextStyle(
-          color: Colors.black,
-          fontSize: 10,
-          fontWeight: FontWeight.w500,
+
+        Text(
+          text,
+          style: TextStyle(
+            color: Colors.black,
+            fontSize: 10,
+            fontWeight: FontWeight.w500,
+          ),
         ),
+      ],
+    );
+  }
+
+  Widget _buildDot({required bool isActive, required bool isDarkMode}) {
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 200),
+      margin: const EdgeInsets.symmetric(horizontal: 2),
+      width: isActive ? 40 : 14,
+      height: 6,
+      decoration: BoxDecoration(
+        color: isActive
+            ? AppColors.primaryGreen
+            : (isDarkMode ? Colors.grey.shade600 : Colors.grey.shade400),
+        borderRadius: BorderRadius.circular(8),
       ),
-    ],
-  );
-}
-
- Widget _buildDot({required bool isActive, required bool isDarkMode}) {
-  return AnimatedContainer(
-    duration: const Duration(milliseconds: 200),
-    margin: const EdgeInsets.symmetric(horizontal: 2),
-    width: isActive ? 40 :14,   
-    height: 6,
-    decoration: BoxDecoration(
-      color: isActive
-          ? AppColors.primaryGreen
-          : (isDarkMode ? Colors.grey.shade600 : Colors.grey.shade400),
-      borderRadius: BorderRadius.circular(8), 
-    ),
-  );
-}
-
+    );
+  }
 
   @override
   void dispose() {

@@ -30,7 +30,13 @@ class _WatchlistSectionState extends State<WatchlistSection> {
       'price': 198.24,
       'change': 4.6,
       'isPositive': true,
-      'chartData': [0.0, 2.0, 1.5, 3.0, 2.5, 4.0, 3.5, 4.6],
+      'chartData': [
+  0.2, 0.4, 0.3, 0.5, 0.7, 1.2, 1.8, 2.5, 3.0, 3.2,
+  3.5, 3.8, 4.2, 4.0, 4.3, 4.5, 4.4, 4.6, 4.7, 4.6,
+  4.5, 4.7, 4.8, 4.7, 4.6
+]
+
+
     },
     {
       'symbol': 'LYFT',
@@ -174,136 +180,130 @@ class _WatchlistSectionState extends State<WatchlistSection> {
 
 
   Widget _buildWatchlistCard(Map<String, dynamic> item) {
-    return Container(
-      width: 160,
-      decoration: BoxDecoration(
-        color: ThemeService.cardColor,
-        borderRadius: BorderRadius.circular(6),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.1),
-            blurRadius: 8,
-            offset: const Offset(0, 2),
-          ),
-        ],
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(8),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-     
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // Stock icon
-                _buildIconWidget(item['symbol']),
-                
-                const SizedBox(width: 12),
-                
-                // Stock information
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        item['symbol'],
-                        style: TextStyle(
-                          color: ThemeService.textPrimaryColor,
-                          fontSize: 14,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      const SizedBox(height: 2),
-                      Text(
-                        item['name'],
-                        style: TextStyle(
-                          color: ThemeService.textPrimaryColor.withOpacity(0.6),
-                          fontSize: 12,
-                          fontWeight: FontWeight.w400,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                
-                // Price and change percentage
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
+  return Container(
+    width: 160,
+    decoration: BoxDecoration(
+      color: ThemeService.cardColor,
+      borderRadius: BorderRadius.circular(6),
+      boxShadow: [
+        BoxShadow(
+          color: Colors.black.withOpacity(0.1),
+          blurRadius: 8,
+          offset: const Offset(0, 2),
+        ),
+      ],
+    ),
+    child: Padding(
+      padding: const EdgeInsets.all(8),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // Top row: icon + symbol & name
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _buildIconWidget(item['symbol']),
+              const SizedBox(width: 8),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      '\$${item['price']}',
+                      item['symbol'],
                       style: TextStyle(
                         color: ThemeService.textPrimaryColor,
-                        fontSize: 12,
-                        fontWeight: FontWeight.w700,
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
-                    const SizedBox(height: 4),
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 8,
-                        vertical: 4,
+                    const SizedBox(height: 2),
+                    Text(
+                      item['name'],
+                      style: TextStyle(
+                        color: ThemeService.textPrimaryColor.withOpacity(0.6),
+                        fontSize: 12,
+                        fontWeight: FontWeight.w400,
                       ),
-                      decoration: BoxDecoration(
-                        color: item['isPositive']
-                            ? Colors.green.withOpacity(0.1)
-                            : Colors.red.withOpacity(0.1),
-                        borderRadius: BorderRadius.circular(6),
-                      ),
-                      child: Row(
-                        children: [
-                          Icon(
-                            item['isPositive']
-                                ? Icons.arrow_upward
-                                : Icons.arrow_downward,
-                            size: 12,
+                    ),
+                    const SizedBox(height: 8),
+                    
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          '\$${item['price']}',
+                          style: TextStyle(
+                            color: ThemeService.textPrimaryColor,
+                            fontSize: 12,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 6, vertical: 2),
+                          decoration: BoxDecoration(
                             color: item['isPositive']
-                                ? Colors.green
-                                : Colors.red,
+                                ? Colors.green.withOpacity(0.1)
+                                : Colors.red.withOpacity(0.1),
+                            borderRadius: BorderRadius.circular(6),
                           ),
-                          const SizedBox(width: 2),
-                          Text(
-                            '${item['change'].abs()}%',
-                            style: TextStyle(
-                              color: item['isPositive']
-                                  ? Colors.green
-                                  : Colors.red,
-                              fontSize: 12,
-                              fontWeight: FontWeight.w600,
-                            ),
+                          child: Row(
+                            children: [
+                              Icon(
+                                item['isPositive']
+                                    ? Icons.arrow_upward
+                                    : Icons.arrow_downward,
+                                size: 12,
+                                color: item['isPositive']
+                                    ? Colors.green
+                                    : Colors.red,
+                              ),
+                              const SizedBox(width: 2),
+                              Text(
+                                '${item['change'].abs()}%',
+                                style: TextStyle(
+                                  color: item['isPositive']
+                                      ? Colors.green
+                                      : Colors.red,
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                            ],
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
-              ],
-            ),
-            
-            const SizedBox(height: 16),
-            
-            // Chart/Graph Section
-            Expanded(
-              child: Container(
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(6),
-                ),
-                child: CustomPaint(
-                  painter: _LineChartPainter(
-                    data: item['chartData'],
-                    isPositive: item['isPositive'],
-                    isDarkMode: ThemeService.isDarkMode.value,
-                  ),
+              ),
+            ],
+          ),
+
+          const SizedBox(height: 10),
+
+          // Chart Section
+          Expanded(
+            child: Container(
+              width: double.infinity,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(6),
+              ),
+              child: CustomPaint(
+                painter: _LineChartPainter(
+                  data: item['chartData'],
+                  isPositive: item['isPositive'],
+                  isDarkMode: ThemeService.isDarkMode.value,
                 ),
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
-    );
-  }
+    ),
+  );
+}
+
 }
 
 // Custom painter for drawing the line chart

@@ -1,7 +1,6 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:sji_mobile/core/styles/theme/theme_service.dart';
 import 'quick_actions.dart';
 
 class CombinedHeader extends StatelessWidget {
@@ -14,7 +13,7 @@ class CombinedHeader extends StatelessWidget {
     return Column(
       children: [
         Container(
-          height: 280,
+          height: 310,
           decoration: const BoxDecoration(
             gradient: LinearGradient(
               colors: [Color(0xFF00E08F), Color(0xFF007A5A)],
@@ -27,26 +26,14 @@ class CombinedHeader extends StatelessWidget {
               // Background image
               Positioned.fill(
                 child: Image.asset(
-                  'assets/images/thatluang1.png',
+                  'assets/images/background.png',
                   fit: BoxFit.cover,
                 ),
               ),
-              // Gradient overlay
-              Container(
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [
-                      Color(0xFF00E08F).withOpacity(0.7),
-                      Color(0xFF007A5A).withOpacity(0.7),
-                    ],
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                  ),
-                ),
-              ),
+            
               _buildAppBar(),
               Positioned(
-                top: 85,
+                top: 75,
                 left: 0,
                 right: 0,
                 child: _buildTotalBalanceSection(),
@@ -71,7 +58,7 @@ class CombinedHeader extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          // Menu Icon (using image)
+     
           IconButton(
             icon: Container(
               width: 40,
@@ -89,11 +76,11 @@ class CombinedHeader extends StatelessWidget {
 
        
          Padding(
-  padding: const EdgeInsets.only(left: 42), // ขยับไปทางขวา 10px
+  padding: const EdgeInsets.only(left: 44), 
   child: Image.asset(
     'assets/icons/sji.png',
-    width: 80,
-    height: 50,
+    width: 60,
+    height: 40,
     fit: BoxFit.contain,
   ),
 ),
@@ -140,7 +127,7 @@ class CombinedHeader extends StatelessWidget {
 
 Widget _buildTotalBalanceSection() {
   return Container(
-    padding: const EdgeInsets.all(20),
+    padding: const EdgeInsets.all(16),
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -157,27 +144,44 @@ Widget _buildTotalBalanceSection() {
             ),
 
   
-            Row(
-              children: [
-                // Eye Icon
-                Container(
-                  padding: const EdgeInsets.all(8),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    shape: BoxShape.circle,
-                  ),
-                  child: const Icon(
-                    Icons.remove_red_eye,
-                    color: Colors.black,
-                    size: 18,
-                  ),
-                ),
+           Row(
+  children: [
+    Column(
+      children: [
+        // Eye Icon
+        Container(
+          padding: const EdgeInsets.all(6),
+          decoration: const BoxDecoration(
+            color: Colors.white,
+            shape: BoxShape.circle,
+          ),
+          child: const Icon(
+            Icons.remove_red_eye,
+            color: Colors.black,
+            size: 18,
+          ),
+        ),
 
-               
+        const SizedBox(height: 8),
 
-               
-              ],
-            )
+        // Reload button under eye
+        Container(
+          padding: const EdgeInsets.all(6),
+          decoration: const BoxDecoration(
+            color: Colors.white,
+            shape: BoxShape.circle,
+          ),
+          child: const Icon(
+            Icons.refresh,
+            color: Colors.black,
+            size: 18,
+          ),
+        ),
+      ],
+    ),
+  ],
+)
+
           ],
         ),
 
